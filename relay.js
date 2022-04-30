@@ -1,0 +1,36 @@
+import {io} from "socket.io-client"
+import {Server} from "socket.io";
+import {User} from "./user.js";
+
+const selfPort=3001
+const server=new Server(selfPort)
+const senderPort=3000
+const socket=io("ws://localhost:"+senderPort)
+
+const stationType="relay"
+
+let receiver1= new User
+let sender1=new User
+
+//sender part
+
+server.on("connection",(socket) => { //Create a new socket
+    receiver1.addr=socket.handshake.address
+    console.log("New socket connection from"+receiver1.addr)
+
+    socket.on('stationType',function (data){
+        receiver1.type=data.stationType
+        console.log("the type is "+receiver1.type)
+    })
+
+    // socket.emit('authCheck',file)
+    // socket.emit('connectionEstablished')
+})
+
+// receiver part
+socket.emit('stationType',{stationType:stationType})
+socket.on('connect',function (){
+    // socket.emit('requestSteam',{filename:filename},function (response){
+    //
+    // })
+})

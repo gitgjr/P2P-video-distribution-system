@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencies": {
+    "express": "^4.17.3",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
+    "socket.io-file": "^2.0.31",
+    "webtorrent-hybrid": "^5.0.2"
+  }
+}
