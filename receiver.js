@@ -1,6 +1,7 @@
 import utils from "./utils.js"
 import { io } from "socket.io-client"
-import dl from"delivery"
+import dl from './delivery.js'
+import  './node_modules/delivery/lib/client/delivery.js'
 
 import fs from "fs";
 
@@ -17,7 +18,7 @@ socket.emit('stationType',{stationType:stationType})
 
 
 socket.on('connect', function(){
-    let delivery = new Delivery(socket);
+    var delivery = new dl.Delivery(socket);
 
     delivery.on('receive.start',function(fileUID){
         console.log('receiving a file!');

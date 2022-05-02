@@ -23,7 +23,7 @@ io.on("connection",(socket) => { //Create a new socket
 
         delivery.send({
             name: 'origin.mp4',
-            path : '../video/mp4_video/origin.mp4',
+            path : '../../video/mp4_video/origin.mp4',
             params: {foo: 'bar'}
         });
 
