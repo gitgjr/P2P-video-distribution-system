@@ -1,6 +1,7 @@
 import Utils from "./utils.js";
 import {User} from "./user.js";
 import { Server } from "socket.io";
+import stream from "./stream.js";
 
 // this is a sender(server)
 const port= 3000
@@ -16,6 +17,7 @@ io.on("connection",(socket) => { //Create a new socket
         receiver1.type=data.stationType
         console.log("the type is "+receiver1.type)
     })
+    stream.serverSendStream(socket)
     // socket.emit('authCheck',file)
     // socket.emit('connectionEstablished')
 })
