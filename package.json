@@ -7,6 +7,7 @@
     "socket.io-client": "^4.4.1",
     "socket.io-file": "^2.0.31",
     "socket.io-file-client": "^2.0.2",
+    "socketio-file-upload": "^0.7.3",
     "webtorrent-hybrid": "^5.0.2"
   }
 }
