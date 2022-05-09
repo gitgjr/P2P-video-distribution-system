@@ -1,7 +1,7 @@
 import utils from "./utils.js"
 import { io } from "socket.io-client"
 import dl from './delivery.js'
-import  './node_modules/delivery/lib/client/delivery.js'
+// import  './node_modules/delivery/lib/client/delivery.js'
 
 import fs from "fs";
 
@@ -18,20 +18,30 @@ socket.emit('stationType',{stationType:stationType})
 
 
 socket.on('connect', function(){
-    var delivery = new dl.Delivery(socket);
-
-    delivery.on('receive.start',function(fileUID){
-        console.log('receiving a file!');
-    })
-    delivery.on('receive.success',function(file){
-        fs.writeFile(file.name, file.buffer, function(err) {
-            if (err) {
-                console.log('File could not be saved: ' + err);
-            } else {
-                console.log('File ' + file.name + " saved");
-            }
-        })
-    })
+    uploader.on('ready', function() {
+        console.log('SocketIOFile ready to go!');
+    });
+    uploader.on('loadstart', function() {
+        console.log('Loading file to browser before sending...');
+    });
+    uploader.on('progress', function(progress) {
+        console.log('Loaded ' + progress.loaded + ' / ' + progress.total);
+    });
+    uploader.on('start', function(fileInfo) {
+        console.log('Start uploading', fileInfo);
+    });
+    uploader.on('stream', function(fileInfo) {
+        console.log('Streaming... sent ' + fileInfo.sent + ' bytes.');
+    });
+    uploader.on('complete', function(fileInfo) {
+        console.log('Upload Complete', fileInfo);
+    });
+    uploader.on('error', function(err) {
+        console.log('Error!', err);
+    });
+    uploader.on('abort', function(fileInfo) {
+        console.log('Aborted: ', fileInfo);
+    });
 })
 // socket.on('connectionEstablished',function(){
 //
