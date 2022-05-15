@@ -1,6 +1,7 @@
 import Utils from "./utils.js";
 import {User} from "./user.js";
 import { Server } from "socket.io";
+import S from "./server.js"
 // import express from "express"
 
 // this is a sender(server)
@@ -17,6 +18,7 @@ io.on("connection",(socket) => { //Create a new socket
         receiver1.type=data.stationType
         console.log("the type is "+receiver1.type)
     })
+    S.serverSendStream(socket)
 
 
 

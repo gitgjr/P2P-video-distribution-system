@@ -1,9 +1,13 @@
 import {io} from "socket.io-client"
 import {Server} from "socket.io";
 import {User} from "./user.js";
-import uploader from "socket.io-file"
+import SocketIOFile from "socket.io-file"
+import SocketIOFileClient from "socket.io-file-client"
 
-function clientRequestStream(){
+
+function clientRequestStream(socket){
+    let uploader = new SocketIOFileClient(socket);
+    let form =document.getElementById('form')
     uploader.on('start', function(fileInfo) {
         console.log('Start uploading', fileInfo);
     });
@@ -35,7 +39,7 @@ function clientRequestStream(){
     };
 }
 
-function serverSendStream(){
+function serverSendStream(socket){
     let count = 0;
     let uploader = new SocketIOFile(socket, {
         // uploadDir: {			// multiple directories
@@ -75,3 +79,5 @@ function serverSendStream(){
         console.log('Aborted: ', fileInfo);
     });
 }
+
+export default {serverSendStream,clientRequestStream}
