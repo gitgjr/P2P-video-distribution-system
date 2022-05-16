@@ -1,3 +1,4 @@
+import * as fs from "fs";
 function getTime(){
     let date_ob = new Date();
 
@@ -31,6 +32,10 @@ function getTime(){
     // console.log(hours + ":" + minutes);
 }
 
+function selectFile(){
+    let data=fs.readFileSync("video/mp4_video/origin.mp4")
+    return data
+}
 function typeJudge(type){
 
 }
@@ -39,5 +44,5 @@ function stationSearch(){
 
 }
 
-export default {getTime}
+export default {getTime,selectFile}
 

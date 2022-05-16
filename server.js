@@ -3,11 +3,12 @@ import {Server} from "socket.io";
 import {User} from "./user.js";
 import SocketIOFile from "socket.io-file"
 import SocketIOFileClient from "socket.io-file-client"
+import utils from "./utils.js"
 
 
 function clientRequestStream(socket){
     let uploader = new SocketIOFileClient(socket);
-    let form =document.getElementById('form')
+    // let form =document.getElementById('form')
     uploader.on('start', function(fileInfo) {
         console.log('Start uploading', fileInfo);
     });
@@ -24,19 +25,24 @@ function clientRequestStream(socket){
         console.log('Aborted: ', fileInfo);
     });
 
-    form.onsubmit = function(ev) {
-        ev.preventDefault();
-
-        var fileEl = document.getElementById('file');
-        var uploadIds = uploader.upload(fileEl, {
-            data: { /* Arbitrary data... */ }
-        });
+    let data=utils.selectFile()
+    let uplaodIds=uploader.upload(data)
+    // let uploadIds=uploader.upload(data,{
+    //     data: { /* Arbitrary data... */ }
+    // })
+    // form.onsubmit = function(ev) {
+    //     ev.preventDefault();
+    //
+    //     var fileEl = document.getElementById('file');
+    //     var uploadIds = uploader.upload(fileEl, {
+    //         data: { /* Arbitrary data... */ }
+    //     });
 
         // setTimeout(function() {
         // uploader.abort(uploadIds[0]);
         // console.log(uploader.getUploadInfo());
         // }, 1000);
-    };
+    // };
 }
 
 function serverSendStream(socket){
