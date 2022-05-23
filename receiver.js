@@ -1,7 +1,8 @@
 import utils from "./utils.js"
 import { io } from "socket.io-client"
-import dl from './delivery.js'
-import  './node_modules/delivery/lib/client/delivery.js'
+
+
+
 
 import fs from "fs";
 
@@ -10,28 +11,23 @@ const socket=io("ws://localhost:"+port)
 const stationType="receiver"
 
 
-let filename='origin'
+let filename="origin.mp4"
 
 //this is a receiver(client)
 
-socket.emit('stationType',{stationType:stationType})
-
-
-socket.on('connect', function(){
-    var delivery = new dl.Delivery(socket);
-
-    delivery.on('receive.start',function(fileUID){
-        console.log('receiving a file!');
+socket.emit("stationType",{stationType:stationType})
+socket.emit("requestStream",{filename:filename})
+socket.on("sendBuffer",function (data){
+    console("receivered buffer,writing")
+    fs.writeFile("data/"+data.filename,data.bufferdata,function (err){
+        if(err){
+            console.log(err.message)
+        }
     })
-    delivery.on('receive.success',function(file){
-        fs.writeFile(file.name, file.buffer, function(err) {
-            if (err) {
-                console.log('File could not be saved: ' + err);
-            } else {
-                console.log('File ' + file.name + " saved");
-            }
-        })
-    })
+})
+
+socket.on("connect", function(){
+
 })
 // socket.on('connectionEstablished',function(){
 //

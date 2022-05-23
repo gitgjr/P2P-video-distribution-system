@@ -1,8 +1,8 @@
 import Utils from "./utils.js";
+import fileUtils from "./fileUtils.js"
 import {User} from "./user.js";
 import { Server } from "socket.io";
-import dl from "delivery";
-import stream from "./stream.js";
+// import express from "express"
 
 // this is a sender(server)
 const port= 3000
@@ -18,20 +18,19 @@ io.on("connection",(socket) => { //Create a new socket
         receiver1.type=data.stationType
         console.log("the type is "+receiver1.type)
     })
-    let delivery = dl.listen(socket);
-    delivery.on('delivery.connect',function(delivery){
-
-        delivery.send({
-            name: 'origin.mp4',
-            path : '../../video/mp4_video/origin.mp4',
-            params: {foo: 'bar'}
-        });
-
-        delivery.on('send.success',function(file){
-            console.log('File successfully sent to client!');
-        });
-
-    });
+    socket.on("requestStream",function(data){
+        fileUtils.searchFile(data.filename).then(function (result) {
+            if(result==true){
+                    fileUtils.openFile(data.filename,function (data){
+                        console.log("sending buffer")
+                        socket.emit("sendBuffer",{bufferdata:data,filename:data.filename})
+                    })
+            }else{
+                console.log("no such resource")
+            }
+        })
+        console.log(fileUtils.searchFile(data.filename))
+    })
     // stream.serverSendStream(socket)
 
     // socket.emit('authCheck',file)
