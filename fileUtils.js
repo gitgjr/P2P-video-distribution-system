@@ -1,11 +1,18 @@
 import fs from "fs"
 
-function searchFile(filaName){
+function searchFile(filaName,stationType){
     return new Promise(function (resolve,reject){
-        fs.readdir("./resource",function (err,files){
+        let path="./relayData"
+        // if (stationType=="sender"){
+        //     path="./resource"
+        // }else{
+        //     path="./relayData"
+        // }
+        fs.readdir(path,function (err,files){
             if(err){console.log(err.message)}
             else
             {
+                console.log("read Dir: "+path)
                 for (let i in files){
                     resolve(files[i]==filaName)
                 }
@@ -15,13 +22,13 @@ function searchFile(filaName){
 }
 
 function openFile(filename){
-    fs.readFile("./resource/"+filename,function (err,data){
+     fs.readFile("./resource/"+filename,function (err,data){
         if(err){
             console.log(err.message)
         }
         console.log("open file successfull")
         console.log(data)
-        callback(data)
+
     })
     return data
 }

@@ -2,6 +2,7 @@ import Utils from "./utils.js";
 import fileUtils from "./fileUtils.js"
 import {User} from "./user.js";
 import { Server } from "socket.io";
+import fs from "fs";
 // import express from "express"
 
 // this is a sender(server)
@@ -20,16 +21,23 @@ io.on("connection",(socket) => { //Create a new socket
     })
     socket.on("requestStream",function(data){
         fileUtils.searchFile(data.filename).then(function (result) {
-            if(result==true){
-                    fileUtils.openFile(data.filename,function (data){
-                        console.log("sending buffer")
-                        socket.emit("sendBuffer",{bufferdata:data,filename:data.filename})
-                    })
+            if(result===true){
+                fs.readFile("./resource/"+data.filename,function (err,bufferdata){
+                    if(err){
+                        console.log(err.message)
+                    }
+                    console.log("open file successfull")
+                    // console.log(bufferdata)
+                    console.log("sending buffer")
+                    socket.emit("sendBuffer",{bufferdata:bufferdata,filename:data.filename})
+                })
+
+
             }else{
                 console.log("no such resource")
             }
         })
-        console.log(fileUtils.searchFile(data.filename))
+        // console.log(fileUtils.searchFile(data.filename))
     })
     // stream.serverSendStream(socket)
 
