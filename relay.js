@@ -31,7 +31,7 @@ server.on("connection",(socket) => { //Create a new socket
             if(err){
                 console.log(err.message)
             }else {
-                console.log("open file successfull")
+                console.log("open file successfully")
                 // console.log(bufferdata)
                 console.log("sending buffer")
                 socket.emit("sendBuffer", {bufferdata: bufferdata, filename: data.filename})

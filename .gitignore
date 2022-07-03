@@ -89,3 +89,7 @@ typings/
 
 # idea
 .idea/
+
+# cache
+./relayData
+./data

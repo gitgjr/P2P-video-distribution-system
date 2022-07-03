@@ -19,24 +19,28 @@ io.on("connection",(socket) => { //Create a new socket
         receiver1.type=data.stationType
         console.log("the type is "+receiver1.type)
     })
+
+    socket.on('ping',function (callback){
+        callback()
+    })
+
     socket.on("requestStream",function(data){
-        fileUtils.searchFile(data.filename).then(function (result) {
-            if(result===true){
-                fs.readFile("./resource/"+data.filename,function (err,bufferdata){
-                    if(err){
-                        console.log(err.message)
-                    }
-                    console.log("open file successfull")
-                    // console.log(bufferdata)
-                    console.log("sending buffer")
-                    socket.emit("sendBuffer",{bufferdata:bufferdata,filename:data.filename})
-                })
-
-
-            }else{
-                console.log("no such resource")
+        // if(result===true){
+        fs.readFile("./resource/"+data.filename,function (err,bufferdata){
+            if(err){
+                console.log(err.message)
             }
+            console.log("open file successfull")
+            // console.log(bufferdata)
+            console.log("sending buffer")
+            socket.emit("sendBuffer",{bufferdata:bufferdata,filename:data.filename})
         })
+
+
+        // }else{
+        //     console.log("no such resource")
+        // }
+
         // console.log(fileUtils.searchFile(data.filename))
     })
     // stream.serverSendStream(socket)

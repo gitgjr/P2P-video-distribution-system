@@ -3,11 +3,11 @@ import fs from "fs"
 function searchFile(filaName,stationType){
     return new Promise(function (resolve,reject){
         let path="./relayData"
-        // if (stationType=="sender"){
-        //     path="./resource"
-        // }else{
-        //     path="./relayData"
-        // }
+        if (stationType=="sender"){
+            path="./resource"
+        }else{
+            path="./relayData"
+        }
         fs.readdir(path,function (err,files){
             if(err){console.log(err.message)}
             else

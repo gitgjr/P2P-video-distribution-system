@@ -39,5 +39,25 @@ function stationSearch(){
 
 }
 
-export default {getTime}
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+}
+
+function pingTest(socket){
+    let avePing=0
+    for(let i=0;i<10;i++){
+        // utils.sleep(1000)
+        socket.emit('ping',function (){
+            const start=Date.now()
+            const duration = Date.now() - start;
+            console.log(Date.now(),":",duration);
+            avePing=duration+avePing
+        })
+    }
+    avePing=avePing/10
+    return avePing
+}
+
+export default {getTime,sleep,pingTest}
 
