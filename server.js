@@ -3,7 +3,7 @@ import {Server} from "socket.io";
 import {User} from "./user.js";
 import uploader from "socket.io-file"
 
-function clientRequestStream(){
+function clientRequestStream(){ //abandon
     uploader.on('start', function(fileInfo) {
         console.log('Start uploading', fileInfo);
     });
@@ -35,7 +35,7 @@ function clientRequestStream(){
     };
 }
 
-function serverSendStream(){
+function serverSendStream(){ //abandon
     let uploader = new SocketIOFile(socket, {
         // uploadDir: {			// multiple directories
         // 	music: 'data/music',
@@ -65,6 +65,11 @@ function serverSendStream(){
     uploader.on('abort', (fileInfo) => {
         console.log('Aborted: ', fileInfo);
     });
+}
+
+function connectTrakcer(io){
+    const socket=io("ws://localhost 2000")
+
 }
 
 

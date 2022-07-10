@@ -20,12 +20,12 @@ io.on("connection",(socket) => { //Create a new socket
         console.log("the type is "+receiver1.type)
     })
 
-    socket.on('ping',function (callback){
-        callback()
+    socket.on('ping',function (){
     })
 
     socket.on("requestStream",function(data){
         // if(result===true){
+
         fs.readFile("./resource/"+data.filename,function (err,bufferdata){
             if(err){
                 console.log(err.message)
@@ -48,4 +48,6 @@ io.on("connection",(socket) => { //Create a new socket
     // socket.emit('authCheck',file)
     // socket.emit('connectionEstablished')
 })
+
+
 

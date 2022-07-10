@@ -47,11 +47,11 @@ function sleep(delay) {
 function pingTest(socket){
     let avePing=0
     for(let i=0;i<10;i++){
-        // utils.sleep(1000)
+        // sleep(1000) //all thread are stoped
         socket.emit('ping',function (){
             const start=Date.now()
             const duration = Date.now() - start;
-            console.log(Date.now(),":",duration);
+            console.log(getTime(),":",duration);
             avePing=duration+avePing
         })
     }
