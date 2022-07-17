@@ -11,6 +11,8 @@ const io =new Server(port)
 const stationType="sender"
 let receiver1=new User()
 
+
+
 io.on("connection",(socket) => { //Create a new socket
     receiver1.addr=socket.handshake.address
     console.log("New socket connection from"+receiver1.addr)
@@ -25,16 +27,29 @@ io.on("connection",(socket) => { //Create a new socket
 
     socket.on("requestStream",function(data){
         // if(result===true){
-
-        fs.readFile("./resource/"+data.filename,function (err,bufferdata){
-            if(err){
-                console.log(err.message)
-            }
-            console.log("open file successfull")
-            // console.log(bufferdata)
-            console.log("sending buffer")
-            socket.emit("sendBuffer",{bufferdata:bufferdata,filename:data.filename})
+        fileUtils.searchFile(data.filename,stationType).then(function(){
+            fs.readFile("./resource/"+data.filename,function (err,bufferdata) {
+                if (err) {
+                    console.log(err.message)
+                }
+                console.log("open file successfull")
+                // console.log(bufferdata)
+                console.log("sending buffer")
+                socket.emit("sendBuffer", {bufferdata: bufferdata, filename: data.filename})
+            })
+        },function (){
+            console.log("no such resource")
         })
+
+        // fs.readFile("./resource/"+data.filename,function (err,bufferdata){
+        //     if(err){
+        //         console.log(err.message)
+        //     }
+        //     console.log("open file successfull")
+        //     // console.log(bufferdata)
+        //     console.log("sending buffer")
+        //     socket.emit("sendBuffer",{bufferdata:bufferdata,filename:data.filename})
+
 
 
         // }else{

@@ -33,6 +33,21 @@ for(let i=0;i<10;i++){
     //     console.log(T.getTime())
     // },1000)
 }
+let judge=0
+function promiseTest(judge){
+    return new Promise(function (resolve,reject){
+        if(judge==1){
+            resolve()
+        }else {
+            reject()
+        }
+    })
+}
+promiseTest(judge).then(function () {
+    console.log("yep")
+},function (){
+    console.log("nope")
+})
 
 
 

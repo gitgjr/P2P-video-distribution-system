@@ -91,5 +91,5 @@ typings/
 .idea/
 
 # cache
-./relayData
-./data
+.relayData/
+.data/

@@ -59,5 +59,7 @@ function pingTest(socket){
     return avePing
 }
 
+
+
 export default {getTime,sleep,pingTest}
 

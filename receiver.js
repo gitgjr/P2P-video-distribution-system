@@ -15,7 +15,7 @@ socket.emit("stationType",{stationType:stationType})
 //ping
 console.log(utils.pingTest(socket))
 
-// socket.emit("requestStream",{filename:filename})
+socket.emit("requestStream",{filename:filename})
 socket.on("sendBuffer",function (data){
     console.log("receivered buffer,writing "+data.filename)
 
