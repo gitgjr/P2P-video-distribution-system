@@ -1,6 +1,7 @@
 import T from "./utils.js";
 import fs from "fs"
 import fileUtils from "./fileUtils.js"
+import U from "./user.js"
 
 
 // let timestring=T.getTime()
@@ -48,6 +49,12 @@ promiseTest(judge).then(function () {
 },function (){
     console.log("nope")
 })
+
+//test json
+let user= new U.User(
+    addr
+)
+
 
 
 

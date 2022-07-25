@@ -14,5 +14,9 @@ class Resources{
     }
 }
 
+class CacheChunk{
+    
+}
+
 
 export {User,Resources}

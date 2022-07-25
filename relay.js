@@ -25,8 +25,8 @@ server.on("connection",(socket) => { //Create a new socket
         receiver1.type=data.stationType
         console.log("the type is "+receiver1.type)
     })
+    //TODO: Setup relayData index
     socket.on("requestStream",function(data){
-        //TODO Setup relayData index
         fs.readFile("./relayData/"+data.filename,function (err,bufferdata){
             if(err){
                 console.log(err.message)
