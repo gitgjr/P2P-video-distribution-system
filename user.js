@@ -7,16 +7,21 @@ class User{
     }
 }
 class Resources{
-    constructor(filename,size,project){
-        this.project=project; // this file belongs which project
+    constructor(file,size,project){
+        this.project=project; // project name,this file belongs which project
         this.size=size;
-        this.filename=filename;
+        this.file=file; //list of names of files
     }
 }
 
-class CacheChunk{
-    
+class CacheChunk{ // this is an intermediate granularity
+    constructor(chunk,size,project){
+        this.project=project; // project name,this chunk belongs which project
+        this.chunk=chunk; //list of chunks of number
+    }
 }
+
+class Progress{}
 
 
 export {User,Resources}

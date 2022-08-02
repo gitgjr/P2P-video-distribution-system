@@ -2,20 +2,28 @@ import utils from "./utils.js"
 import { io } from "socket.io-client"
 import fs from "fs";
 
-const port =3000 //3000 for sender,3001 for relay
-const socket=io("ws://localhost:"+port)
-const stationType="receiver"
+import {User} from "./user.js";
+import {Server} from "socket.io";
 
+
+
+const port =3000 //3000 for sender,3001 for relay
+const socket=io("54.168.52.187:"+port)
+const stationType="receiver"
 
 let filename="origin.mp4"
 
 //this is a receiver(client)
 socket.emit("stationType",{stationType:stationType})
 
+// let sender1=new User()
+// sender1.addr=socket.handshake.address
+// console.log("New socket connection from"+sender1.addr)
+
 //ping
 console.log(utils.pingTest(socket))
 
-socket.emit("requestStream",{filename:filename})
+// socket.emit("requestStream",{filename:filename})
 socket.on("sendBuffer",function (data){
     console.log("receivered buffer,writing "+data.filename)
 
@@ -36,5 +44,6 @@ socket.on("connect", function(){
 // socket.on('connectionEstablished',function(){
 //
 // })
+
 
 
