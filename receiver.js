@@ -7,8 +7,8 @@ import {Server} from "socket.io";
 
 
 
-const port =3000 //3000 for sender,3001 for relay
-const socket=io("54.168.52.187:"+port)
+const port =3000 //3000 for sender,3001 for relay //54.168.52.187 for server
+const socket=io("ws://54.168.52.187:"+port)
 const stationType="receiver"
 
 let filename="origin.mp4"
@@ -21,9 +21,9 @@ socket.emit("stationType",{stationType:stationType})
 // console.log("New socket connection from"+sender1.addr)
 
 //ping
-console.log(utils.pingTest(socket))
+// console.log(utils.pingTest(socket))
 
-// socket.emit("requestStream",{filename:filename})
+socket.emit("requestStream",{filename:filename})
 socket.on("sendBuffer",function (data){
     console.log("receivered buffer,writing "+data.filename)
 
