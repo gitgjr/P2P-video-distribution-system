@@ -59,7 +59,11 @@ function pingTest(socket){
     return avePing
 }
 
+function printTimeInterval(startTime){
+    console.log(getTime(),"The time interval is",Math.floor((Date.now()-startTime)/1000),"ms")
+}
 
 
-export default {getTime,sleep,pingTest}
+
+export default {getTime,sleep,pingTest,printTimeInterval}
 

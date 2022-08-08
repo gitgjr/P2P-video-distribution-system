@@ -9,8 +9,7 @@ import utils from "./utils.js";
 
 // this is a sender(server)
 const port= 3000
-// const httpServer = createServer();
-// const io = new Server(httpServer, { /* options */ });
+
 const io =new Server(port)
 const stationType="sender"
 let receiver1=new User()
@@ -39,12 +38,18 @@ io.on("connection",(socket) => { //Create a new socket
                 }
                 console.log("open file successfull")
                 // console.log(bufferdata)
-                console.log("sending buffer")
-                socket.emit("sendBuffer", {bufferdata: bufferdata, filename: data.filename})
+                
+                let sendBufferPromise =new Promise(function(resolve,reject){
+                    console.log("sending buffer")
+                    socket.emit("sendBuffer", {bufferdata: bufferdata, filename: data.filename})
+                })
+                sendBufferPromise.then(console.log(utils.getTime(),"send successfully")).then(socket.emit("sendFinish"))
+                
             })
         },function (){
             console.log("no such resource")
         })
+        
 
         // fs.readFile("./resource/"+data.filename,function (err,bufferdata){
         //     if(err){
@@ -68,8 +73,6 @@ io.on("connection",(socket) => { //Create a new socket
     // socket.emit('authCheck',file)
     // socket.emit('connectionEstablished')
 })
-// httpServer.listen(port);
 
-// io.listen(port)
 
 

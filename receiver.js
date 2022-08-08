@@ -1,9 +1,10 @@
 import utils from "./utils.js"
 import { io } from "socket.io-client"
-import fs from "fs";
+
 
 import {User} from "./user.js";
 import {Server} from "socket.io";
+import server from "./server.js";
 
 
 
@@ -22,24 +23,27 @@ socket.emit("stationType",{stationType:stationType})
 
 //ping
 // console.log(utils.pingTest(socket))
+let requestStreamPromise=new Promise(function(resolve,reject){
+    console.log(utils.getTime(),"Request Chunk")
+    socket.emit("requestStream",{filename:filename})
+    resolve()
+})
 
-socket.emit("requestStream",{filename:filename})
+let chunkStartTime
+requestStreamPromise.then(function(){
+    chunkStartTime=Date.now()
+}).then(function(){console.log(chunkStartTime)})
+
+
 socket.on("sendBuffer",function (data){
-    console.log("receivered buffer,writing "+data.filename)
-
-    fs.writeFile("data/"+data.filename,data.bufferdata,function (err){
-        if(err){
-            console.log(err.message)
-        }else{
-            console.log("write successfully")
-        }
-    socket.on()
-
+    let receiveChunkPromise=new Promise(function(resolve,reject){
+        if(server.clientReceiveChunk(data)){resolve()}
     })
+    receiveChunkPromise.then(utils.printTimeInterval(chunkStartTime))
 })
 
 socket.on("connect", function(){
-
+    
 })
 // socket.on('connectionEstablished',function(){
 //

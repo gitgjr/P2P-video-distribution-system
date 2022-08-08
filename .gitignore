@@ -92,4 +92,5 @@ typings/
 
 # cache
 .relayData/
+.Data/
 .data/

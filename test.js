@@ -55,6 +55,9 @@ let user= new U.User(
     addr
 )
 
+//test print(not finish)
+function stdPrint(content){}
+
 
 
 
