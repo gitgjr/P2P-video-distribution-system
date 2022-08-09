@@ -10,7 +10,7 @@ import utils from "./utils.js";
 // this is a sender(server)
 const port= 3000
 
-const io =new Server(port)
+const io =new Server(port,{maxHttpBufferSize: 1e8})
 const stationType="sender"
 let receiver1=new User()
 
@@ -36,11 +36,11 @@ io.on("connection",(socket) => { //Create a new socket
                 if (err) {
                     console.log(err.message)
                 }
-                console.log("open file successfull")
+                console.log("open file successfully")
                 // console.log(bufferdata)
                 
                 let sendBufferPromise =new Promise(function(resolve,reject){
-                    console.log("sending buffer")
+                    console.log(utils.getTime(),"sending buffer")
                     socket.emit("sendBuffer", {bufferdata: bufferdata, filename: data.filename})
                 })
                 sendBufferPromise.then(console.log(utils.getTime(),"send successfully")).then(socket.emit("sendFinish"))

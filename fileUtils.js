@@ -35,15 +35,16 @@ function searchFile(filaName,stationType){
 }
 
 function openFile(filename){
+    let outerData
      fs.readFile("./resource/"+filename,function (err,data){
         if(err){
             console.log(err.message)
         }
         console.log("open file successfull")
         console.log(data)
-
+        outerData=data
     })
-    return data
+    return outerData
 }
 
 function readJson(){
@@ -59,5 +60,6 @@ function readJson(){
 function writeJson(obj){
     fs.writeFileSync('./output.json', JSON.stringify(obj));
 }
+function scanFolder(){}
 
 export default {searchFile,openFile,writeJson,readJson}

@@ -1,21 +1,33 @@
 import utils from "./utils.js"
 import { io } from "socket.io-client"
-
-
-import {User} from "./user.js";
-import {Server} from "socket.io";
+import input from "./input.js"
 import server from "./server.js";
+import test from "./test.js"
 
 
 
-const port =3000 //3000 for sender,3001 for relay //54.168.52.187 for server
-const socket=io("ws://54.168.52.187:"+port)
+const port =3000 //3000 for sender,3001 for relay //54.168.52.187 for Tokyo server
+const socket=io("ws://localhost:"+port)
 const stationType="receiver"
 
-let filename="origin.mp4"
+
 
 //this is a receiver(client)
 socket.emit("stationType",{stationType:stationType})
+
+let filename
+switch (input.selectTestVideo()){
+    case "1":
+        filename="origin.mp4";
+        break;
+    case "2":
+        filename="big.mp4";
+        break;
+    case "3":
+        filename="giant0.ts";
+        break;
+}
+console.log(filename)
 
 // let sender1=new User()
 // sender1.addr=socket.handshake.address
@@ -25,7 +37,8 @@ socket.emit("stationType",{stationType:stationType})
 // console.log(utils.pingTest(socket))
 let requestStreamPromise=new Promise(function(resolve,reject){
     console.log(utils.getTime(),"Request Chunk")
-    socket.emit("requestStream",{filename:filename})
+    test.testBig(socket)
+    // socket.emit("requestStream",{filename:filename})
     resolve()
 })
 
@@ -38,10 +51,13 @@ requestStreamPromise.then(function(){
 socket.on("sendBuffer",function (data){
     let receiveChunkPromise=new Promise(function(resolve,reject){
         if(server.clientReceiveChunk(data)){resolve()}
+
     })
     receiveChunkPromise.then(utils.printTimeInterval(chunkStartTime))
 })
-
+socket.on("sendFinish",function (){
+    utils.printTimeInterval(chunkStartTime)
+})
 socket.on("connect", function(){
     
 })
