@@ -19,18 +19,18 @@ const stationType="receiver"
 socket.emit("stationType",{stationType:stationType})
 
 let filename
-switch (input.selectTestVideo()){
-    case "1":
-        filename="origin0.ts";
-        break;
-    case "2":
-        filename="big.mp4";
-        break;
-    case "3":
-        filename="giant0.ts";
-        break;
-}
-console.log(filename)
+// switch (input.selectTestVideo()){
+//     case "1":
+//         filename="origin.mp4";
+//         break;
+//     case "2":
+//         filename="big.mp4";
+//         break;
+//     case "3":
+//         filename="giant0.ts";
+//         break;
+// }
+// console.log(filename)
 
 // let sender1=new User()
 // sender1.addr=socket.handshake.address
@@ -40,6 +40,7 @@ console.log(filename)
 // console.log(utils.pingTest(socket))
 let requestStreamPromise=new Promise(function(resolve,reject){
     console.log(utils.getTime(),"Request Chunk")
+    test.testBig(socket)
     test.testGiant(socket)
     // socket.emit("requestStream",{filename:filename})
     resolve()

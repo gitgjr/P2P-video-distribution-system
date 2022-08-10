@@ -60,7 +60,8 @@ function pingTest(socket){
 }
 
 function printTimeInterval(startTime){
-    console.log(getTime(),"The time interval is",Math.floor((Date.now()-startTime)/1000),"ms")
+    // console.log(getTime(),"The time interval is",Math.floor((Date.now()-startTime)/1000),"ms")
+    console.log(getTime(),"The time interval is",(Date.now()-startTime),"ms")
 }
 
 
