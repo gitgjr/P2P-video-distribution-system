@@ -10,7 +10,7 @@ import utils from "./utils.js";
 // this is a sender(server)
 const port= 3000
 
-const io =new Server(port,{maxHttpBufferSize: 1e8})
+const io =new Server(port,{maxHttpBufferSize: 1e9})
 const stationType="sender"
 let receiver1=new User()
 
