@@ -27,7 +27,6 @@ function requestPromise(innerFilename,socket,i){
             innerFilename="giant"+i.toString()+".ts"
             socket.emit("requestStream",{filename:innerFilename})
         }
-        resolve()
     })
 }
 

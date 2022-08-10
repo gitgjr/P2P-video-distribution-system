@@ -39,8 +39,8 @@ let filename
 //ping
 // console.log(utils.pingTest(socket))
 let requestStreamPromise=new Promise(function(resolve,reject){
-    console.log(utils.getTime(),"Request Chunk")
-    test.testBig(socket)
+    // console.log(utils.getTime(),"Request Chunk")
+    // test.testBig(socket)
     test.testGiant(socket)
     // socket.emit("requestStream",{filename:filename})
     resolve()
