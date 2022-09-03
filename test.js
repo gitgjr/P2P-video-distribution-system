@@ -15,7 +15,7 @@ function testGiant(socket){
 }
 function testPartGiant(socket){
     let innerFilename
-    for (let i=0;i<=4;i++){
+    for (let i=20;i<=21;i++){
         innerFilename="giant"+i.toString()+".ts"
         socket.emit("requestStream",{filename:innerFilename})
     }
@@ -31,4 +31,4 @@ function requestPromise(innerFilename,socket,i){
     })
 }
 
-export default {testBig,testGiant}
+export default {testBig,testGiant,testPartGiant}

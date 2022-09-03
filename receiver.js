@@ -10,7 +10,7 @@ const port =3000
 //3000 for sender,3001 for relay
 //54.168.52.187 for Tokyo server
 //18.117.72.236 for USA server
-const socket=io("ws://18.117.72.236:"+port)
+const socket=io("ws://54.168.52.187:"+port)
 const stationType="receiver"
 
 
@@ -18,7 +18,7 @@ const stationType="receiver"
 //this is a receiver(client)
 socket.emit("stationType",{stationType:stationType})
 
-let filename
+let filename="origin.mp4"
 // switch (input.selectTestVideo()){
 //     case "1":
 //         filename="origin.mp4";
@@ -41,15 +41,16 @@ let filename
 let requestStreamPromise=new Promise(function(resolve,reject){
     console.log(utils.getTime(),"Request Chunk")
     test.testBig(socket)
-    test.testGiant(socket)
+    // test.testGiant(socket)
     // socket.emit("requestStream",{filename:filename})
+    // test.testPartGiant(socket)
     resolve()
 })
 
 let chunkStartTime
 requestStreamPromise.then(function(){
     chunkStartTime=Date.now()
-}).then(function(){console.log(chunkStartTime)})
+}).then(function(){console.log(utils.getTime(),"start time",chunkStartTime)})
 
 
 socket.on("sendBuffer",function (data){
