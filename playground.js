@@ -1,63 +1,27 @@
-import T from "./utils.js";
-import fs from "fs"
-import fileUtils from "./fileUtils.js"
-import U from "./user.js"
-
-
-// let timestring=T.getTime()
-// console.log(timestring)
-console.log(T.getTime())
-
-// let filename="origin.mp4"
-// fs.readdir("./resource",function (err, files){
-//     if (err) {
-//         console.log(err);
-//         return;
-//     }
-//     console.log(files);
-//     for(let i in files){
-//         console.log(files[i])
-//         if(files[i]==filename){
-//             console.log("true")
-//             return;
-//         }
-//         console.log("false")
-//     }
-// })
-// let data=fileUtils.openFile(filename)
-// console.log(data)
-
-for(let i=0;i<10;i++){
-    T.sleep(1000)
-    console.log(T.getTime())
-    // setTimeout(function (){
-    //     console.log(T.getTime())
-    // },1000)
-}
-let judge=0
-function promiseTest(judge){
-    return new Promise(function (resolve,reject){
-        if(judge==1){
-            resolve()
-        }else {
-            reject()
-        }
-    })
-}
-promiseTest(judge).then(function () {
-    console.log("yep")
-},function (){
-    console.log("nope")
-})
-
-//test json
-let user= new U.User(
-    addr
-)
-
-//test print(not finish)
-function stdPrint(content){}
+import utils from "./utils.js";
+import process from "child_process";
+import A from"./adaptvieStream.js"
 
 
 
+// async function emitSomething(){
+//     console.log("test aysnc")
+//     // await writeSomething()
+//     setTimeout(function (){
+//         console.log("emit some thing")
+//         Promise.resolve("1000 ms time out")
+//     },1000)
+// }
+// async function writeSomething(){
+//     //socket.on
+//     //write
+//     console.log("write done")
+//     Promise.resolve()
+// }
+
+// writeSomething().then(emitSomething())
+
+console.log(utils.deleteExtension("file.mp4"))
+A.mp4ToHLS("big.mp4","low")
+// process.exec("cd resource")
 

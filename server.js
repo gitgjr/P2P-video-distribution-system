@@ -17,26 +17,19 @@ async function clientReceiveChunk(data){
     fs.writeFile("data/"+data.filename,data.bufferdata,function (err){
         if(err){
             console.log(err.message)
-            return false
+            Promise.reject(err.message)
         }else{
             console.log("write successfully")
-            return true
+            Promise.resolve()
         }
     })
 }
-async function clientDownloadProcess(data){
-    console.log("received buffer,writing "+data.filename)
-    return new Promise(function (resolve, reject){
-        fs.writeFile("data/"+data.filename,data.bufferdata,function (err){
-            if(err){
-                console.log(err.message)
-                reject(err.message)
-            }else{
-                console.log("write successfully")
-                resolve()
-            }
-        })
-    })
+async function clientDownloadProcess(data,socket){
+    for(let i=1;i<=5;i++){
+        await clientReceiveChunk(data)
+        let innerFilename="giant"+i.toString()+".ts"
+        socket.emit("requestStream",{filename:innerFilename})
+    }
 }
 
 

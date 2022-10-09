@@ -10,7 +10,7 @@ const port =3000
 //3000 for sender,3001 for relay
 //54.168.52.187 for Tokyo server
 //18.117.72.236 for USA server
-const socket=io("ws://18.117.72.236:"+port)
+const socket=io("ws://54.168.52.187:"+port)
 const stationType="receiver"
 
 
@@ -39,9 +39,10 @@ let filename
 //ping
 // console.log(utils.pingTest(socket))
 let requestStreamPromise=new Promise(function(resolve,reject){
-    // console.log(utils.getTime(),"Request Chunk")
-    // test.testBig(socket)
-    test.testGiant(socket)
+    console.log(utils.getTime(),"Request Chunk")
+
+    test.testBig(socket)
+    // test.testGiant(socket)
     // socket.emit("requestStream",{filename:filename})
     resolve()
 })
@@ -53,11 +54,8 @@ requestStreamPromise.then(function(){
 
 
 socket.on("sendBuffer",function (data){
-    let receiveChunkPromise=new Promise(function(resolve,reject){
-        if(server.clientReceiveChunk(data)){resolve()}
 
-    })
-    receiveChunkPromise.then(utils.printTimeInterval(chunkStartTime))
+    server.clientReceiveChunk(data).then(utils.printTimeInterval(chunkStartTime))
 })
 socket.on("sendFinish",function (){
     console.log("Download task finished")
