@@ -40,6 +40,7 @@ let filename="origin.mp4"
 // console.log(utils.pingTest(socket))
 let requestStreamPromise=new Promise(function(resolve,reject){
     console.log(utils.getTime(),"Request Chunk")
+
     test.testBig(socket)
     // test.testGiant(socket)
     // socket.emit("requestStream",{filename:filename})
@@ -54,11 +55,8 @@ requestStreamPromise.then(function(){
 
 
 socket.on("sendBuffer",function (data){
-    let receiveChunkPromise=new Promise(function(resolve,reject){
-        if(server.clientReceiveChunk(data)){resolve()}
 
-    })
-    receiveChunkPromise.then(utils.printTimeInterval(chunkStartTime))
+    server.clientReceiveChunk(data).then(utils.printTimeInterval(chunkStartTime))
 })
 socket.on("sendFinish",function (){
     console.log("Download task finished")

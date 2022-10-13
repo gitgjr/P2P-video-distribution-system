@@ -11,19 +11,27 @@ function connectTracker(io,responses,stationType){
 }
 
 
-function clientReceiveChunk(data){
-    console.log("receivered buffer,writing "+data.filename)
+async function clientReceiveChunk(data){
+    console.log("received buffer,writing "+data.filename)
 
     fs.writeFile("data/"+data.filename,data.bufferdata,function (err){
         if(err){
             console.log(err.message)
-            return false
+            Promise.reject(err.message)
         }else{
             console.log("write successfully")
-            return true
+            Promise.resolve()
         }
     })
 }
+async function clientDownloadProcess(data,socket){
+    for(let i=1;i<=5;i++){
+        await clientReceiveChunk(data)
+        let innerFilename="giant"+i.toString()+".ts"
+        socket.emit("requestStream",{filename:innerFilename})
+    }
+}
 
-export default {connectTracker,clientReceiveChunk}
+
+export default {connectTracker,clientReceiveChunk,clientDownloadProcess}
 

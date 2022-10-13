@@ -1,5 +1,7 @@
 
 //test big
+import server from "./server.js";
+
 function testBig(socket){
     let innerFilename
     for (let i=0;i<=11;i++){
@@ -10,8 +12,8 @@ function testBig(socket){
 
 //test giant
 function testGiant(socket){
-    let innerFilename="giant"
-    requestPromise(innerFilename,socket,0).then(requestPromise(innerFilename,socket,6)).then(requestPromise(innerFilename,socket,11)).then(requestPromise(innerFilename,socket,16))
+    socket.emit("requestStream",{filename:"giant0.ts"})
+    server.clientDownloadProcess()
 }
 function testPartGiant(socket){
     let innerFilename
@@ -27,7 +29,6 @@ function requestPromise(innerFilename,socket,i){
             innerFilename="giant"+i.toString()+".ts"
             socket.emit("requestStream",{filename:innerFilename})
         }
-        resolve()
     })
 }
 
