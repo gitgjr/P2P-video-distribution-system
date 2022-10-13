@@ -3,6 +3,7 @@
   "dependencies": {
     "depcheck": "^1.4.3",
     "prompt-sync": "^4.2.0",
+    "redis": "^4.3.1",
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1"
   }
