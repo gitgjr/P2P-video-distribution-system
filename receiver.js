@@ -55,8 +55,7 @@ requestStreamPromise.then(function(){
 
 
 socket.on("sendBuffer",function (data){
-
-    server.clientReceiveChunk(data).then(utils.printTimeInterval(chunkStartTime))
+    server.clientReceiveChunk(data).then(utils.printTimeInterval(chunkStartTime)) //TODO fix 100M bug
 })
 socket.on("sendFinish",function (){
     console.log("Download task finished")

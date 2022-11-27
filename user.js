@@ -2,7 +2,7 @@ class User{
     constructor(addr,socketID,type,resources){
         this.addr = addr;
         this.socketID = socketID;
-        this.type=type
+        this.type=type //relay,sender,receiver
         this.resources=resources //(name,size)list
     }
 }

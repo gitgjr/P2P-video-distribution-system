@@ -1,11 +1,13 @@
 import { Server } from "socket.io";
 import {User} from "./user.js";
-import fileUtils from "./fileUtils"
+import redis from "redis"
+import fileUtils from "./fileUtils.js"
 
 const port=2000
 const io=new Server(port)
-
-let nodeList=[]
+const nodeStoreServer=redis.createClient()//(port,ip)
+await nodeStoreServer.connect()
+// let nodeList=[]
 
 io.on("connection",function (socket) {
     socket.on("addNode", function (data) {
@@ -21,10 +23,16 @@ io.on("connection",function (socket) {
         user.socketID = socket.id
         user.type = data.stationType
         user.resource = data.resources //function of scanning the resources mada
-        nodeList.push(user)
+        // nodeList.push(user)
+        nodeStoreServer.hSet("userList",user.addr,JSON.stringify(user))//TODO make a random function to create userID
+    })//TODO
+    socket.on("requestNodeList",function (){ //send the node list to the station
+        let nodeAddrList=nodeStoreServer.hGetAll("userList",function (err){
+            if(err){
+                console.log(err)
+            }
+        })
+        io.emit("sendNodeList",{nodeList:nodeAddrList})
     })
 })
-io.on("getNodeList",function (){
-        //send the node list to the station
 
-})
