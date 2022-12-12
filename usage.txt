@@ -1,0 +1,3 @@
+data: client download path
+relayData: resources held by relay
+resources:resources held by server

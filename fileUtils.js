@@ -33,6 +33,27 @@ function searchFile(filaName,stationType){
         })
     })
 }
+async function scanResources(stationType){
+    let path
+    let fileList=[]
+    if (stationType=="sender"){
+        path="./resource"
+    }else{
+        path="./relayData"
+    }
+    fs.readdir(path,function (err,files){
+        if(err){console.log(err)}
+        else
+        {
+            // console.log("read Dir: "+path)
+            for (let i in files){
+                // console.log(String(files[i]))
+                fileList.push(String(files[i]))
+            }
+        }
+    })
+    return fileList
+}
 
 function openFile(filename){
     let outerData
@@ -62,4 +83,4 @@ function writeJson(obj){
 }
 function scanFolder(){}
 
-export default {searchFile,openFile,writeJson,readJson}
+export default {searchFile,openFile,writeJson,readJson,scanResources}

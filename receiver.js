@@ -8,17 +8,18 @@ import test from "./test.js"
 
 const port =3000
 //3000 for sender,3001 for relay
-//54.168.52.187 for Tokyo server
+//54.168.52.187 for Tokyo server "ws://54.168.52.187:"
 //18.117.72.236 for USA server
-const socket=io("ws://54.168.52.187:"+port)
+const socket=io("ws://localhost:"+port)
 const stationType="receiver"
-
 
 
 //this is a receiver(client)
 socket.emit("stationType",{stationType:stationType})
 
-let filename="origin.mp4"
+
+server.connectTracker(io,stationType)
+// let filename="origin.mp4"
 // switch (input.selectTestVideo()){
 //     case "1":
 //         filename="origin.mp4";
@@ -37,21 +38,31 @@ let filename="origin.mp4"
 // console.log("New socket connection from"+sender1.addr)
 
 //ping
-// console.log(utils.pingTest(socket))
-let requestStreamPromise=new Promise(function(resolve,reject){
-    console.log(utils.getTime(),"Request Chunk")
-
-    test.testBig(socket)
-    // test.testGiant(socket)
-    // socket.emit("requestStream",{filename:filename})
-    // test.testPartGiant(socket)
-    resolve()
+utils.pingTest(socket).then(function (result) {
+    console.log(utils.getTime(),"the ping is "+result)
 })
 
+
+
+
 let chunkStartTime
-requestStreamPromise.then(function(){
-    chunkStartTime=Date.now()
-}).then(function(){console.log(utils.getTime(),"start time",chunkStartTime)})
+function requestStream(){//test
+    let requestStreamPromise=new Promise(function(resolve,reject){
+        console.log(utils.getTime(),"Request Chunk")
+
+        test.testBig(socket)
+
+        // test.testGiant(socket)
+        // socket.emit("requestStream",{filename:filename})
+        // test.testPartGiant(socket)
+        //TODO downloader
+        resolve()
+    })
+    requestStreamPromise.then(function(){
+        chunkStartTime=Date.now()
+    }).then(function(){console.log(utils.getTime(),"start time",chunkStartTime)})
+}
+
 
 
 socket.on("sendBuffer",function (data){

@@ -44,11 +44,11 @@ function sleep(delay) {
     while (new Date().getTime() < start + delay);
 }
 
-function pingTest(socket){
+async function pingTest(socket){
     let avePing=0
     for(let i=0;i<10;i++){
         // sleep(1000) //all thread are stoped
-        socket.emit('ping',function (){
+        await socket.emit('ping',function (){
             const start=Date.now()
             const duration = Date.now() - start;
             console.log(getTime(),":",duration);
@@ -58,6 +58,7 @@ function pingTest(socket){
     avePing=avePing/10
     return avePing
 }
+
 
 function printTimeInterval(startTime){
     // console.log(getTime(),"The time interval is",Math.floor((Date.now()-startTime)/1000),"ms")

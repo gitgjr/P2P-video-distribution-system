@@ -2,12 +2,13 @@ import {io} from "socket.io-client"
 import {Server} from "socket.io";
 import {User} from "./user.js";
 import fs from "fs";
+import fileUtils from "./fileUtils.js";
 
 
-function connectTracker(io,responses,stationType){
-    const socket=io("ws://localhost 2000")
-    socket.emit("addNode",{resources:responses,stationType:stationType})
-    socket.emit("getNodeList")
+function connectTracker(io,stationType){ //the resources client have
+    const tracker=io("ws://localhost:2000")
+    tracker.emit("addNode",{resources:fileUtils.scanResources(stationType),stationType:stationType})
+    tracker.emit("getNodeList")
 }
 
 
@@ -24,7 +25,7 @@ async function clientReceiveChunk(data){
         }
     })
 }
-async function clientDownloadProcess(data,socket){
+async function clientDownloadProcess(data,socket){ //muti file download
     for(let i=1;i<=5;i++){
         await clientReceiveChunk(data)
         let innerFilename="giant"+i.toString()+".ts"
