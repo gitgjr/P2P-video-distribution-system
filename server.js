@@ -9,6 +9,9 @@ function connectTracker(io,stationType){ //the resources client have
     const tracker=io("ws://localhost:2000")
     tracker.emit("addNode",{resources:fileUtils.scanResources(stationType),stationType:stationType})
     tracker.emit("getNodeList")
+    tracker.on("sendNodeList",function(data){
+        return data
+    })
 }
 
 
