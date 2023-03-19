@@ -1,7 +1,7 @@
 import {io} from "socket.io-client"
 import {Server} from "socket.io";
 import {User} from "./user.js";
-import fileUtils from "./fileUtils.js";
+import fileUtils from "./Utils/fileUtils.js";
 import fs from "fs";
 
 const selfPort=3001

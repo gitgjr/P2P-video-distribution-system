@@ -95,3 +95,6 @@ relayData/
 Data/
 data/
 resource/
+
+# mac
+.DS_Store

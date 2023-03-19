@@ -65,7 +65,7 @@ function printTimeInterval(startTime){
     console.log(getTime(),"The time interval is",(Date.now()-startTime),"ms")
 }
 
-function deleteExtension(inputFileName){
+function deleteFileExtension(inputFileName){
     let index=inputFileName.indexOf(".") // find where the "." is
     inputFileName=inputFileName.slice(0,index)
     return inputFileName
@@ -73,5 +73,5 @@ function deleteExtension(inputFileName){
 
 
 
-export default {getTime,sleep,pingTest,printTimeInterval,deleteExtension}
+export default {getTime,sleep,pingTest,printTimeInterval,deleteExtension: deleteFileExtension}
 

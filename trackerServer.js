@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import {User} from "./user.js";
 import redis from "redis"
-import fileUtils from "./fileUtils.js"
+import fileUtils from "./Utils/fileUtils.js"
 import utils from "./utils.js";
 
 const port=2000

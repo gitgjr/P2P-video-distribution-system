@@ -1,5 +1,5 @@
 import Utils from "./utils.js";
-import fileUtils from "./fileUtils.js"
+import fileUtils from "./Utils/fileUtils.js"
 import {User} from "./user.js";
 import { Server } from "socket.io";
 import { createServer } from "https";
