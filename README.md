@@ -1,5 +1,5 @@
 # CC-for-HLS
-CC-for~HLS is a p2p assisted adaptive bitrate HTTP video streaming(HLS) transmit system.
+CC-for-HLS is a p2p assisted adaptive bitrate HTTP video streaming(HLS) transmit system.
 
 It based on node.js and socket.io.
 You can also use this repo as a bittorrent-like experimental P2P platform.
