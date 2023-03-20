@@ -1,3 +1,4 @@
+//Classes of peer and other
 class User{
     constructor(addr,socketID,type,resources){
         this.addr = addr;

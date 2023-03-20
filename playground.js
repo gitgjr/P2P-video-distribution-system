@@ -1,6 +1,6 @@
-import utils from "./utils.js";
+import utils from "./Utils/utils.js";
 import process from "child_process";
-import A from"./adaptvieStream.js"
+import A from "./video/adaptvieStream.js"
 import {User} from "./user.js"
 import redis from "redis";
 

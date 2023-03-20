@@ -1,10 +1,10 @@
-import Utils from "./utils.js";
+import Utils from "./Utils/utils.js";
 import fileUtils from "./Utils/fileUtils.js"
 import {User} from "./user.js";
 import { Server } from "socket.io";
 import { createServer } from "https";
 import fs from "fs";
-import utils from "./utils.js";
+import utils from "./Utils/utils.js";
 // import express from "express"
 
 // this is a sender(server)

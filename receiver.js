@@ -1,4 +1,4 @@
-import utils from "./utils.js"
+import utils from "./Utils/utils.js"
 import { io } from "socket.io-client"
 import input from "./input.js"
 import server from "./server.js";
