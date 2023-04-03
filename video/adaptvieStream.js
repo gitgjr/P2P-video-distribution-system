@@ -1,5 +1,9 @@
 import process from "child_process"
+<<<<<<< Updated upstream:video/adaptvieStream.js
 import utils from "../Utils/utils.js";
+=======
+import utils from "./Utils/utils.js";
+>>>>>>> Stashed changes:adaptvieStream.js
 
 function mp4ToHLS(file,quality){
     switch (quality){
