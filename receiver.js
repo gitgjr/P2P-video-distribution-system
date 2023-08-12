@@ -18,7 +18,9 @@ const stationType="receiver"
 socket.emit("stationType",{stationType:stationType})
 
 
-server.connectTracker(io,stationType)
+// server.connectTracker(io,stationType)
+
+
 // let filename="origin.mp4"
 // switch (input.selectTestVideo()){
 //     case "1":

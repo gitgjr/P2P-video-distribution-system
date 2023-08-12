@@ -91,10 +91,10 @@ typings/
 .idea/
 
 # cache
-relayData/
-Data/
-data/
-resource/
+relayData/*
+Data/*
+data
+resource/*
 
 # mac
 .DS_Store
