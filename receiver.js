@@ -48,11 +48,12 @@ utils.pingTest(socket).then(function (result) {
 
 
 let chunkStartTime
+requestStream()
 function requestStream(){//test
     let requestStreamPromise=new Promise(function(resolve,reject){
         console.log(utils.getTime(),"Request Chunk")
 
-        test.testBig(socket)
+        test.transmitTest(socket)
 
         // test.testGiant(socket)
         // socket.emit("requestStream",{filename:filename})

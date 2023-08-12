@@ -2,6 +2,11 @@
 //test big
 import server from "./server.js";
 
+function transmitTest(socket){
+    let filename="origin.mp4"
+    socket.emit("requestStream",{filename:filename})
+}
+
 function testBig(socket){
     let innerFilename
     for (let i=0;i<=11;i++){
@@ -32,4 +37,4 @@ function requestPromise(innerFilename,socket,i){
     })
 }
 
-export default {testBig,testGiant,testPartGiant}
+export default {testBig,testGiant,testPartGiant,transmitTest}
